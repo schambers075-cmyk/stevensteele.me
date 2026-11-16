@@ -1,0 +1,102 @@
+cd stevensteele-astro
+npm install
+npm run build   # outputs to dist/
+npm run dev     # local previewimport { defineConfig } from 'astro/config';
+
+export default defineConfig({
+  site: 'https://stevensteele.me',
+  output: 'static'
+});
+{
+  "name": "stevensteele-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^4.16.0"
+  }
+}
+---
+const { title = 'Steven Steele', description = 'Talk Show Host | Recording Artist | Marketing Director' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style is:global>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #f5f5f5; line-height: 1.6; }
+    header { background: linear-gradient(135deg, #1a1a1a 0%, #2d1b0e 100%); padding: 4rem 2rem; text-align: center; border-bottom: 3px solid #c9a227; }
+    .profile { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 4px solid #c9a227; margin-bottom: 1.5rem; }
+    h1 { font-size: 3rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 0.5rem; }
+    .tagline { font-size: 1.25rem; color: #c9a227; font-weight: 500; }
+    nav { background: #111; padding: 1rem; text-align: center; position: sticky; top: 0; z-index: 100; }
+    nav a { color: #f5f5f5; text-decoration: none; margin: 0 1.5rem; font-weight: 500; transition: color 0.3s; }
+    nav a:hover { color: #c9a227; }
+    main { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+    h2 { font-size: 2rem; margin-bottom: 1.5rem; color: #c9a227; border-bottom: 2px solid #333; padding-bottom: 0.5rem; }
+    .about p { margin-bottom: 1rem; font-size: 1.1rem; }
+    .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .link-card { background: #1a1a1a; padding: 1.5rem; border-radius: 12px; text-align: center; border: 1px solid #333; transition: transform 0.2s, border-color 0.2s; }
+    .link-card:hover { transform: translateY(-4px); border-color: #c9a227; }
+    .link-card a { color: #f5f5f5; text-decoration: none; font-weight: 600; display: block; }
+    footer { text-align: center; padding: 2rem; background: #111; color: #888; font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 2rem; } nav a { display: block; margin: 0.5rem 0; } }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="/profile.jpg" alt="Steven Steele" class="profile" />
+    <h1>Steven Steele</h1>
+    <p class="tagline">Talk Show Host | Recording Artist | Marketing Director</p>
+  </header>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#links">Connect</a>
+    <a href="#work">Work</a>
+  </nav>
+  <main>
+    <slot />
+  </main>
+  <footer>
+    <p>stevensteele.me — Personal site. All content based on public information.</p>
+  </footer>
+</body>
+</html>
+---
+import Base from '../layouts/Base.astro';
+---
+<Base>
+  <section id="about">
+    <h2>About</h2>
+    <div class="about">
+      <p>YouTube talk show host covering crypto, culture, and current events. Recording artist and creative advisor.</p>
+      <p>Marketing Director for MAGA Memecoin ($TRUMP). Focused on community building, philanthropy, and independent thinking.</p>
+      <p>Not conservative, not progressive — just an artist and marketing mastermind.</p>
+    </div>
+  </section>
+  <section id="links">
+    <h2>Connect</h2>
+    <div class="links">
+      <div class="link-card"><a href="https://www.youtube.com/c/stevensteele" target="_blank">YouTube</a></div>
+      <div class="link-card"><a href="https://x.com/MrStevenSteele" target="_blank">X / Twitter</a></div>
+      <div class="link-card"><a href="https://www.instagram.com/mrstevensteele" target="_blank">Instagram</a></div>
+      <div class="link-card"><a href="https://linktr.ee/stevensteele" target="_blank">Linktree</a></div>
+      <div class="link-card"><a href="https://pump.fun/u/StevenSteele" target="_blank">Pump.fun</a></div>
+      <div class="link-card"><a href="mailto:stevensteeleisreal@gmail.com">Email</a></div>
+    </div>
+  </section>
+  <section id="work">
+    <h2>Work & Focus</h2>
+    <p>Long-running YouTube streams and content on crypto markets, Dogecoin, and broader culture. Marketing leadership for MAGA Memecoin, emphasizing transparency, charity (veterans & anti-trafficking), and community.</p>
+    <p style="margin-top:1rem;">Advocate for mass deportations and border security. Politically independent with a history of voting Democrat until immigration realities shifted perspective.</p>
+  </section>
+</Base>
